@@ -21,7 +21,7 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/dashboard" element={<ProjectPage />} />
+            <Route path="/dashboard/*" element={<ProjectPage />} />
           </Routes>
         </Router>
       </Auth0Provider>
