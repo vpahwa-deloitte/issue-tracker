@@ -1,14 +1,13 @@
 .project-page {
-    display: flex;
-    height: 100vh;
-  }
-  
-  .project-sidenav {
-    background-color: #1b242a;
-    flex: 20%;
-  }
-  
-  .project-welcome {
-    flex: 80%;
-  }
-  
+  display: flex;
+  height: 100vh;
+}
+
+.project-sidenav {
+  background-color: #1b242a;
+  flex: 20%;
+}
+
+.project-welcome {
+  flex: 80%;
+}

@@ -27,6 +27,10 @@ const CreateProject: React.FC = () => {
     },
   });
 
+  const handleReset = () => {
+    formik.resetForm();
+  };
+
   return (
     <div className="create-project-container">
       <h2 className="create-project-title">Create Project</h2>
@@ -96,7 +100,7 @@ const CreateProject: React.FC = () => {
           </div>
         </div>
         <div className="form-row">
-          <button type="reset" className="reset-button">
+          <button type="reset" className="reset-button" onClick={handleReset}>
             RESET
           </button>
           <button type="submit" className="create-button">
