@@ -1,29 +1,66 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { addProject } from './projectSlice';
 
 import './CreateProject.css';
+import axios from 'axios';
+import { selectProjects } from './projectSlice';
+import { useAppSelector } from '../../app/hooks';
 
-const CreateProject: React.FC = () => {
+const CreateProject = () => {
+  const dispatch = useDispatch();
+  const projectsList = useAppSelector(selectProjects);
+
+  console.log(projectsList);
+
   const initialValues = {
     projectName: '',
-    owner: '',
+    projectOwner: 1,
     projectStartDate: '',
     projectEndDate: '',
   };
 
   const validationSchema = Yup.object({
     projectName: Yup.string().required('Project Name is required'),
-    owner: Yup.string().required('Owner is required'),
+    projectOwner: Yup.string().required('Owner is required'),
     projectStartDate: Yup.date().required('Start Date is required'),
-    projectEndDate: Yup.date().required('End Date is required'),
+    projectEndDate: Yup.date()
+      .required('End Date is required')
+      .min(Yup.ref('projectStartDate'), 'End Date must be after Start Date'),
   });
 
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (values) => {
-      console.log('Form submitted with values:', values);
+    onSubmit: async (values) => {
+      try {
+        const headers = {
+          'Content-Type': 'application/json',
+          'userid': '1',
+        };
+
+        const data = {
+          projectName: values.projectName,
+          projectOwner: values.projectOwner,
+          projectStartDate: values.projectStartDate,
+          projectEndDate: values.projectEndDate,
+        };
+        const response = await axios.post(
+          'https://hu-22-angular-mockapi-urtjok3rza-wl.a.run.app/project',
+          data, { headers }
+        );
+
+        if (response.status === 200 || response.status === 201) {
+          dispatch(addProject(response.data));
+          console.log('Form submitted with values:', values);
+        } else {
+          console.error('API Error:', response);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
     },
   });
 
@@ -52,18 +89,18 @@ const CreateProject: React.FC = () => {
             ) : null}
           </div>
           <div className="form-group">
-            <label htmlFor="owner">Owner:</label>
+            <label htmlFor="projectOwner">Owner:</label>
             <input
               type="text"
-              id="owner"
-              name="owner"
+              id="projectOwner"
+              name="projectOwner"
               placeholder="Enter owner name"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.owner}
+              value={formik.values.projectOwner}
             />
-            {formik.touched.owner && formik.errors.owner ? (
-              <div className="error">{formik.errors.owner}</div>
+            {formik.touched.projectOwner && formik.errors.projectOwner ? (
+              <div className="error">{formik.errors.projectOwner}</div>
             ) : null}
           </div>
         </div>

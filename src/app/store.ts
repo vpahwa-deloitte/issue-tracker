@@ -1,11 +1,13 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
 import activeTabReducer from './activeTabSlice';
+import projectReducer from '../components/CreateProject/projectSlice'
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     activeTab: activeTabReducer,
+    project: projectReducer,
   },
 });
 
