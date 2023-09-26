@@ -3,9 +3,9 @@ import { RootState } from '../../app/store';
 
 interface Project {
   projectName: string;
-  owner: string;
-  startDate: string; 
-  endDate: string; 
+  projectOwner: number;
+  projectStartDate: string; 
+  projectEndDate: string; 
 }
 
 interface ProjectState {

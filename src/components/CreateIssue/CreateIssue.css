@@ -1,11 +1,6 @@
 .create-issue-container {
   margin: 8rem 4rem 0 4rem;
 }
-.create-project-title {
-  font-size: 24px;
-  margin: 20px 20px 40px 20px;
-}
-
 .form-row {
   display: flex;
   flex-wrap: wrap;
@@ -42,7 +37,7 @@ input[type="date"] {
 
 select {
   height: 30px;
-  width: 440px;
+  width: 420px;
   border: none;
   border-bottom: 1px solid #1b242a;
   border-radius: 5px;

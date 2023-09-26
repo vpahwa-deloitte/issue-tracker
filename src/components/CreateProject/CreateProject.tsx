@@ -6,14 +6,9 @@ import { addProject } from './projectSlice';
 
 import './CreateProject.css';
 import axios from 'axios';
-import { selectProjects } from './projectSlice';
-import { useAppSelector } from '../../app/hooks';
 
 const CreateProject = () => {
   const dispatch = useDispatch();
-  const projectsList = useAppSelector(selectProjects);
-
-  console.log(projectsList);
 
   const initialValues = {
     projectName: '',
@@ -53,7 +48,7 @@ const CreateProject = () => {
         );
 
         if (response.status === 200 || response.status === 201) {
-          dispatch(addProject(response.data));
+          dispatch(addProject(data));
           console.log('Form submitted with values:', values);
         } else {
           console.error('API Error:', response);
