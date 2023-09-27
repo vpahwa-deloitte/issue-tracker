@@ -19,10 +19,10 @@ const ProjectPage: React.FC = () => {
 
   const projectsList = useAppSelector(selectProjects);
 
-  // if (!isAuthenticated) {
-  //   navigate("/login");
-  //   return null;
-  // }
+  if (!isAuthenticated) {
+    navigate("/login");
+    return null;
+  }
 
   return (
     <div className="project-page">
